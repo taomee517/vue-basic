@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="了解vue组件基础"/>
+		<title>vue component</title>
+		<script type="text/javascript" src="../static/common.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ol v-if="code==200">
+				<!-- 模板应用 -->
+				<threshold 
+					v-for="item in result"
+					v-bind:thresh="item"
+					v-bind:key="item.id"
+				>					
+				</threshold>
+			</ol>
+		</div>
+		
+		<script type="text/javascript">
+			// 定义组件(全局)
+			// Vue.component("threshold", {
+			// 	props: ["thresh"],
+			// 	template: '<li>{{thresh.field}}阈值：{{thresh.lower}} {{thresh.unit}} - {{thresh.upper}} {{thresh.unit}}</li>'
+			// });
+			
+			// 定义参数
+			var app = new Vue({
+			  el: '#app',
+			  data: {
+				code: 200,
+				message: "成功",
+				result: [
+					{id: 1, field: "电压", unit: "V", lower: 5, upper: 36},
+					{id: 2, field: "频率", unit: "Hz", lower: 100, upper: 5000},
+					{id: 3, field: "温度", unit: "°C", lower: -10, upper: 50}
+				]
+			  },
+			  // 定义组件(局部)
+			  components: {
+				  "threshold": {
+						props: ["thresh"],
+						template: '<li>{{thresh.field}}阈值：{{thresh.lower}} {{thresh.unit}} - {{thresh.upper}} {{thresh.unit}}</li>'
+					}
+			  }		  
+			});
+		</script>
+	</body>
+</html>

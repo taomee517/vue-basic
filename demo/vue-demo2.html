@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>了解v-bind</title>
+		<script src="../static/common.js"></script>
+		<style type="text/css">
+			.mark{
+				color: red
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app-2">
+		  <!-- v-bind用法： v-bind:标签属性="动态变量" -->	
+		  <p v-bind:class="dynamicClass">动态改变class</p>
+		  <input v-bind:value="code"><br>
+		  <span v-bind:title="message">
+		    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+		  </span>		  
+		</div>
+		
+		<script type="text/javascript">
+			var vue = new Vue({
+			  el: '#app-2',
+			  data: {
+				code: 200,
+				message: '页面加载时间：' + new Date().toLocaleString(),
+				dynamicClass: "mark"
+			  }
+			})
+		</script>
+	</body>
+</html>

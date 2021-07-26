@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-if/v-for</title>
+		<script src="../static/common.js"></script>
+	</head>
+	<body>
+		<div id="app-3">
+			<ol v-if="code==200">
+				<li v-for="item in result">{{item.name}}</li>
+			</ol>
+			<ul>
+				<!-- :key 等价于v-bind:key 为每个项提供一个唯一的key属性 -->
+				<li v-for="item in result" :key="item.uuid">{{item.uuid}} {{item.name}}</li>
+			</ul>
+			<ul>
+				<!-- v-for 遍历取出对象的所有属性 -->
+				<li v-for="field in book">{{field}}</li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript">
+			var vue = new Vue({
+			  el: '#app-3',
+			  data: {
+				code: 200,  
+			    message: "成功",
+				result: [
+					{id: 1, uuid: "e85899cf-3f72-41b2-a78a-863bd8ff1a70", name: "book"},
+					{id: 2, uuid: "e85899cf-3f72-41b2-a78a-863bd8ff1a71", name: "card"},
+					{id: 3, uuid: "e85899cf-3f72-41b2-a78a-863bd8ff1a72", name: "phone"}
+				],
+				book: {
+					title: "围城",
+					author: "钱钟书",
+					publisher: "中华书局",
+					year: 2010
+				}
+			  },
+			})
+
+			// var vue = new Vue({
+			//   el: '#app-3',
+			//   data: {
+			// 	code: 404,  
+			//     message: "查询结果为空",
+			// 	result: []
+			//   }
+			// })
+		</script>
+	</body>
+</html>

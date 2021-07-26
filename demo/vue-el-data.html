@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="vue表单"/>
+		<title>了解vue表单双向绑定</title>
+		<script type="text/javascript" src="../static/common.js"></script>
+	</head>
+	<body>
+		<form id="info">
+			<label for="username">用户名：</label>
+			<input id="username" type="text" v-model="username" placeholder="username" />
+			<br><span>username is: <span style="color: #FF0000;">{{username}}</span></span><br><br>
+			
+			<label>性别：</label>
+			<label for="gender-male">男</label>
+			<input id="gender-male" type="radio" v-model="gender" value="男"/>
+			<label for="gender-female">女</label>
+			<input id="gender-female" type="radio" v-model="gender" value="女"/>
+			<br><span>gender is: <span style="color: #FF0000;">{{gender}}</span></span><br><br>
+			
+			<label for="phone">手机：</label>
+			<input id="phone" type="text" v-model="phone" placeholder="phone number" />
+			<br><span>phone number is: <span style="color: #FF0000;">{{phone}}</span></span><br><br>
+			
+			<input type="button" @click="submit" value="注册" />
+		</form>
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+			  // el赋值方式一：初始化时指定；
+			  // el: '#info',
+			  
+			 // data赋值方式一：静态对象式；
+			 //  data: {
+				// username: "涛D",
+				// gender: "男",
+				// phone: "13167819865"
+			 //  },
+			 
+			 // data赋值方式二：动态函数式，返回结果为一个对象；
+			 // data：function(){} 或者 data(){}
+			  data(){
+				  return {
+						username: "涛D",
+						gender: "男",
+						phone: "13167819865"
+				  }
+			  },
+			  methods:{
+				  submit: function(){
+					  var postData = {
+						  username: this.username,
+						  phone: this.phone,
+						  gender: this.gender
+					  };
+					  console.log(postData);
+				  }
+			  }
+			});
+			
+			//el赋值方式二：通过vm对象$mount(挂载);
+			vm.$mount("#info");
+		</script>
+	</body>
+</html>

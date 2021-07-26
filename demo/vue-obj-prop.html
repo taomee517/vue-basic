@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="了解vue参数模板"/>
+		<title>vue demo</title>
+		<script type="text/javascript" src="../static/common.js"></script>
+	</head>
+	<body>
+		<form id="info">
+			<label for="username">用户名：</label>
+			<input id="username" type="text" v-model="username" placeholder="username" />
+			<br><span>username is: <span style="color: #FF0000;">{{username}}</span></span><br><br>
+			
+			<label>性别：</label>
+			<label for="gender-male">男</label>
+			<input id="gender-male" type="radio" v-model="gender" value="男"/>
+			<label for="gender-female">女</label>
+			<input id="gender-female" type="radio" v-model="gender" value="女"/>
+			<br><span>gender is: <span style="color: #FF0000;">{{gender}}</span></span><br><br>
+			
+			<label for="age">年龄：</label>
+			<input id="age" type="text" v-model="age" placeholder="age" />
+			<br><span>age is: <span style="color: #FF0000;">{{age}}</span></span><br><br>
+
+		</form>
+		
+		<script type="text/javascript">
+			let number = 18;
+			let user = {
+				username: "涛D",
+				gender: "男"
+			}
+			Object.defineProperty(user, "age", {
+				// value: number,
+				enumerable: true,	// 控制属性是否可以枚举，默认false
+				// writable: true,		// 控制属性是否可以被修改，默认false
+				configurable: true, // 控制属性是否可以被删除，默认false	
+				
+				// 获取age属性时调用
+				get(){
+					console.log("正在读取age属性");
+					return number;
+				},
+				
+				// // 修改age属性时调用
+				set(v){
+					console.log("正在设置age: " + v);
+					number = v;
+				}
+			});
+			var app = new Vue({
+			  el: '#info',
+			  data(){
+				  return user;
+			  }
+			});
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>了解vue-on/function的用法</title>
+		<script src="../static/common.js"></script>
+	</head>
+	<body>
+		<div id="app-4">
+			<p id="text"> {{message}} </p>
+			<!-- <button id="control" v-on:click="redShow">字体变红</button> -->
+			<!-- @click等价于v-on:click -->
+			<!-- Vue中的事件修饰符： -->
+			<!-- 1. stop 		阻止事件传递到父级元素（冒泡） -->
+			<!-- 2. prevent 	阻止默认事件事件，如a标签的href, form的post -->
+			<!-- 3. once 		事件只触发一次 -->
+			<!-- 4. capture 	使用事件的捕获模式 -->
+			<!-- 5. selt 		只有event.target是当前操作的元素本身时才触发事件 -->
+			<!-- 6. passive 	事件的默认行为立即执行，无需等到事件的回调结果 -->
+			<button id="control" @click="redShow">字体变红</button>
+		</div>
+		
+		<script type="text/javascript">
+			var vue = new Vue({
+			  el: '#app-4',
+			  data: {
+			    message: 'Hello,Vue.js'
+			  },
+			  methods: {
+				 redShow: function(){
+					var controlDom = document.getElementById("control");
+					var controlMsg = controlDom.innerText; 
+					var color = "red";
+					var msg = "恢复原样";
+					if(controlMsg == "恢复原样"){
+						color = "black";
+						msg = "字体变红";
+					}
+					
+				 	var textDom = document.getElementById("text");
+					textDom.setAttribute("style","color:" + color);
+					controlDom.innerHTML = msg;		
+				 } 
+			  }
+			})
+		</script>
+	</body>
+</html>
