@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="了解vue参数模板"/>
+		<title>vue demo</title>
+		<script type="text/javascript" src="../static/common.js"></script>
+	</head>
+	<body>
+		<!-- computed与watch之间的区别： -->
+		<!-- 1. computed能完成的功能watch都可以完成 -->
+		<!-- 2. watch能完成的功能computed不一定能完成; 例如：watch可以进行异步操作 -->
+		
+		<!-- 两个vue编程小原则 -->
+		<!-- 1. 所有被Vue管理的函数，最好写成普通函数，这样this才指向vm对象 或 组件实例对象 -->
+		<!-- 2. 所有不被Vue管理的函数，建议写成箭头函数（定时器的回调函数，ajax的回调函数，promise的回调函数），这样this才会向上层查找，指向vm 或 组件实例对象 -->
+		<div id="app">
+		  姓： <input type="text" v-model="firstname" /><br><br>
+		  名： <input type="text" v-model="lastname" /><br><br>
+		  全名：<input type="text" v-model="fullname" />
+		</div>
+		
+		<script type="text/javascript">
+			var app = new Vue({
+			  el: '#app',
+			  data: {
+				firstname: '',
+				lastname: '',
+				fullname: ''
+			  },
+			  computed:{
+				  //完整写法
+				  // fullname: {
+				  //      get(){
+						//    return this.firstname + " " + this.lastname;
+					 //   }
+					   
+					 //   set(){
+						// 	//将相关的变量反向赋值
+					 //   }
+				  // },
+				  
+				  //函数写法
+				 //  fullname: function(){
+					// return this.firstname + " " + this.lastname;
+				 //  }
+				 
+				 // 简写
+				  // fullname(){
+				 	// return this.firstname + " " + this.lastname;
+				  // }
+			  },
+			  
+			  watch: {
+				  firstname(val){
+					  setTimeout(()=>{
+						 this.fullname = val + " " + this.lastname + "(watch-first)" ;
+					  }, 300);
+				  },
+				  
+				  lastname(val){
+					  setTimeout(()=>{
+						 this.fullname = this.firstname + " " + val + "(watch-last)" ;
+					  }, 300);
+				  }
+			  }
+			})
+		</script>
+	</body>
+</html>
+
