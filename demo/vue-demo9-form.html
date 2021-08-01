@@ -32,6 +32,14 @@
 			<label for="hobbies-music">音乐</label>
 			<br><span>hobbies are: <span style="color: #FF0000;">{{hobbies}}</span></span><br><br>
 			
+			<label>城市：</label>
+			<select v-model="city">
+				<option value="成都">成都</option>
+				<option value="重庆">重庆</option>
+				<option value="武汉">武汉</option>
+			</select>			
+			<br><span>city is: <span style="color: #FF0000;">{{city}}</span></span><br><br>
+			
 			<label for="motto">座右铭：</label><br>
 			<textarea id="motto" v-model="motto" style="width: 400px;height: 80px;"></textarea>
 			<br><span>motto is: <span style="color: #FF0000;">{{motto}}</span></span><br><br>
@@ -47,6 +55,7 @@
 				phone: "",
 				gender: "",
 				hobbies: [],
+				city: "重庆",
 				motto: ""
 			  },
 			  methods:{
