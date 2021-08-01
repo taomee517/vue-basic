@@ -16,6 +16,10 @@
 			<input id="phone" type="text" v-model="phone" placeholder="phone number" />
 			<br><span>phone number is: <span style="color: #FF0000;">{{phone}}</span></span><br><br>
 			
+			<label for="age">年龄：</label>
+			<input id="age" type="text" v-model.number="age" placeholder="age" />
+			<br><span>age number is: <span style="color: #FF0000;">{{age}}</span></span><br><br>
+			
 			<label>性别：</label>
 			<label for="gender-male">男</label>
 			<input id="gender-male" type="radio" v-model="gender" value="男"/>
@@ -52,6 +56,7 @@
 			  el: '#info',
 			  data: {
 				username: "",
+				age: 0,
 				phone: "",
 				gender: "",
 				hobbies: [],
