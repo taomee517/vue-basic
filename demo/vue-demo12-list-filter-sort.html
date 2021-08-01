@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="了解vue参数模板"/>
+		<title>vue demo</title>
+		<script type="text/javascript" src="../static/common.js"></script>
+	</head>
+	<body>
+		<div id="app">
+		  <input v-model="keyword" placeholder="请输入过滤条件" />
+		  <input type="button" @click="sortType = 1" value="时间正序" />
+		  <input type="button" @click="sortType = 2" value="时间逆序" />
+		  <input type="button" @click="sortType = 0" value="时间原序" />
+<!-- 		  <span>sortType = {{sortType}}</span> -->
+		  <br>
+		  <ol>
+			 <li v-for="brand in filterBrands" :key="brand.uuid">{{brand.name}} &emsp;&emsp; {{brand.mark}} &emsp;&emsp; {{brand.createBy}} &emsp;&emsp; {{brand.createTime}}</li> 
+		  </ol>
+		</div>
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+			  el: '#app',
+			  data: {
+				keyword: "",
+				sortType: 0,
+				brands: [
+					{"uuid":"1ab9afe6-00a7-4b24-af6c-76b11d9bc0b9","name":"千寻位置","createTime":"2021/07/04 14:57:50","mark":"上海千寻位置科技有限公司","createBy":"admin"},
+					{"uuid":"3240da97-6eae-4f58-9afd-2c613e31ffbf","name":"多邦","createTime":"2021/07/02 14:57:00","mark":"重庆多邦科技有限公司","createBy":"admin"},
+					{"uuid":"a4c549cb-96b6-414b-a8bb-3f61209857ef","name":"替帝西","createTime":"2021/07/05 14:57:50","mark":"北京替帝西交通科技有限公司","createBy":"admin"},
+					{"uuid":"d2311396-4a13-4160-b895-e2f52d926eaa","name":"飞尚","createTime":"2021/07/04 18:57:50","mark":"江西飞尚科技有限公司","createBy":"admin"},
+					{"uuid":"417eaa2f-c5f1-4856-b77b-e6cd19c6ac77","name":"阳光气象","createTime":"2021/07/04 14:56:50","mark":"阳光气象科技有限公司","createBy":"admin"},
+					{"uuid":"92962fa9-d13d-4fb5-ab46-60b7d4fe92f6","name":"华测","createTime":"2021/07/09 20:23:50","mark":"上海华测导航技术股份有限公司","createBy":"admin"},
+					{"uuid":"70680b54-e92b-4a70-8454-4f2a2a187565","name":"东华","createTime":"2021/05/04 14:57:00","mark":"江苏东华测试技术股份有限公司","createBy":"admin"},
+					{"uuid":"6b4a218c-9d9e-475d-9e6e-9a66cbc4d4fb","name":"基康","createTime":"2021/03/04 14:00:00","mark":"基康仪器股份有限公司","createBy":"admin"},
+					{"uuid":"fe8a5d7c-3cf7-4f68-a01b-6bf7626ab4cd","name":"北航","createTime":"2021/07/11 14:36:50","mark":"北京航空航天大学云南创新研究院","createBy":"admin"},
+					{"uuid":"c90da82a-b755-486d-83d3-f02e74fd535b","name":"海康威视","createTime":"2021/09/04 23:08:50","mark":"杭州海康威视数字股份有限公司","createBy":"admin"},
+				],
+				// filterBrands: []
+ 			   },
+			  //  watch: {
+					// keyword: {
+					// 	immediate: true,
+					// 	handler(val){
+					// 		this.filterBrands = this.brands.filter(brand => {
+					// 			return brand.mark.indexOf(val) !== -1
+					// 		});
+					// 	}
+					// }
+			  //  }
+			  
+			  // computed写法
+			  computed: {
+				filterBrands(){
+					const tempBrands = this.brands.filter(brand => {
+						return brand.mark.indexOf(this.keyword) !== -1
+					});
+					if(this.sortType){
+						tempBrands.sort((b1, b2) => {
+							var b1_date = new Date(b1.createTime);
+							var b2_date = new Date(b2.createTime);
+							return this.sortType === 1 ? b1_date-b2_date : b2_date-b1_date;
+						});
+					}
+					return tempBrands;
+				}
+			  }
+			})
+			
+		</script>
+	</body>
+</html>
+
