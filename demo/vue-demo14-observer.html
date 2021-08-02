@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="了解vue参数模板"/>
+		<title>vue demo</title>
+		<script type="text/javascript" src="../static/common.js"></script>
+	</head>
+	<body>
+		<div id="app">
+		</div>
+		
+		<script type="text/javascript">
+			let data = {
+				name: "taomee",
+				age: 32
+			}
+			
+			// 创建一个监视的实例，用于监视data中属性的变化
+			const observer = new Observer(data);
+			console.log(observer);
+			
+			let vm = {};
+			vm._data = data = observer;
+			function Observer(obj) {
+				// 汇总对象中的所有属性形成一个数组
+				const keys = Object.keys(obj);
+				keys.forEach(k => {
+					Object.defineProperty(this, k, {
+						get(){
+							return obj[k];
+						},
+						set(val){
+							obj[k]=val;
+						}
+					});
+				})
+			}
+		</script>
+	</body>
+</html>
+
