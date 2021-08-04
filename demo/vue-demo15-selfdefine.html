@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="了解vue参数模板"/>
+		<title>vue demo</title>
+		<script type="text/javascript" src="../static/common.js"></script>
+	</head>
+	<body>
+		<!-- 
+		自定义指定总结： 
+			一、 定义语法： 
+				1. 局部定义：
+					a. new Vue{
+						directives: {指令名：配置对象}
+					}
+					b. new Vue{
+						directives: {指令名：回调函数}
+					}
+				2. 全局指令
+					Vue.directive(指令名：配置对象)
+					Vue.directive(指令名：回调函数)
+			二、配置对象中常用的3个回调：
+				1. bind: 指令与元素成功绑定时调用
+				2. inserted: 指令所在元素被插入页面时调用
+				3. update: 指令所在模板重新解析时调用
+			三、备注
+				1. 指令定义时不加v-,但使用时需要加v-
+				2. 指令如果是多个单词要使用kebab-case命令方式，不要用camelCase方式
+		
+		
+		-->
+		<div id="app">
+		  <span> {{ message }} </span> <br><br>
+		  <input type="button" @click="add" value="点击数值递增" />
+		  <p>当前数值是：<span v-text="number"></span></p>
+		  <p>放大10倍是：<span v-multi="number"></span></p>
+		  <p>加10000并聚焦：<input v-focus="number"/></p>
+		</div>
+		
+		<script type="text/javascript">
+			var app = new Vue({
+			  el: '#app',
+			  data: {
+				message: 'Hello Vue!',
+				number: 0
+			  },
+			  methods: {
+				  add(){
+					  this.number++
+				  }
+			  },
+			  directives:{
+				  // 相当于实现了bind和update接口
+				  multi(element, binding){
+					  element.innerText = binding.value * 10;
+				  },
+				  focus: {
+					  bind(element, binding){
+						  element.value = binding.value + 10000;
+					  },
+					  inserted(element, binding){
+						  element.focus();
+					  },
+					  update(element, binding){
+						  element.value = binding.value + 10000;
+						  element.focus()
+					  }
+				  }
+			  }
+			})
+		</script>
+	</body>
+</html>
+
