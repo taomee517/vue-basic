@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="了解vue参数模板"/>
+		<title>vue demo</title>
+		<script type="text/javascript" src="../static/common.js"></script>
+	</head>
+	<body>
+		<!-- 
+			Vue中使用组件的三个步骤：
+				一、定义组件
+					使用Vue.extend(option)创建,其中option和new Vue中的option传入参数几乎一样，但也有些区别：
+					1. el不写， 因为最终所有的组件都要经过一个vm的管理，由vm中的el决定服务哪个容器
+					2. data必须写成函数形式，避免组件被复用时，数据存在引用关系
+					备注： 使用template可以配置组件结构
+				二、注册组件
+					1. 局部注册： 靠new Vue时传入components参数选项
+					2. 全局注册： Vue.component("name", component)
+				三、使用组件
+					直接用定义好的组件标签，如<header></header>
+				
+		 -->
+		<div id="app1">
+		  <header>{{ brandName }}</header>
+		  <footer>{{ telephone }}</footer>
+		</div>
+		<hr>
+		<div id="app2">
+		  <header>{{ brandName }}</header>
+		  <footer>{{ telephone }}</footer>
+		</div>
+		
+		<script type="text/javascript">
+			var header = Vue.extend({
+				template: `
+					<header>{{name}}</header>
+				`,
+				data(){
+					return {
+						name: "xxx brand name"
+					}
+				}
+			});
+			
+			var footer = Vue.extend({
+				template: `
+					<footer>{{tel}}</footer>
+				`,
+				data(){
+					return {
+						tel: "138********"
+					}
+				}
+			})
+		
+			var app1 = new Vue({
+			  el: '#app1',
+			  data: {
+				brandName: 'AeroIOT',
+				telephone: '16574836458'
+			  },
+			  comments:{
+				  header,
+				  footer
+			  }
+			});
+			
+			var app2 = new Vue({
+			  el: '#app2',
+			  data: {
+				brandName: 'Fuzik',
+				telephone: '16574836466'
+			  },
+			  comments:{
+				  header,
+				  footer
+			  }
+			})
+		</script>
+	</body>
+</html>
+
