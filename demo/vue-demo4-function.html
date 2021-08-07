@@ -8,7 +8,7 @@
 	<body>
 		<div id="app-4">
 			<p id="text"> {{message}} </p>
-			<!-- <button id="control" v-on:click="redShow">字体变红</button> -->
+			<!-- <button id="control" v-on:click="changeColor">字体变红</button> -->
 			<!-- @click等价于v-on:click -->
 			<!-- Vue中的事件修饰符： -->
 			<!-- 1. stop 		阻止事件传递到父级元素（冒泡） -->
@@ -17,7 +17,7 @@
 			<!-- 4. capture 	使用事件的捕获模式 -->
 			<!-- 5. selt 		只有event.target是当前操作的元素本身时才触发事件 -->
 			<!-- 6. passive 	事件的默认行为立即执行，无需等到事件的回调结果 -->
-			<button id="control" @click="redShow">字体变红</button>
+			<button id="control" @click="changeColor">字体变红</button>
 		</div>
 		
 		<script type="text/javascript">
@@ -27,7 +27,7 @@
 			    message: 'Hello,Vue.js'
 			  },
 			  methods: {
-				 redShow: function(){
+				 changeColor: function(){
 					var controlDom = document.getElementById("control");
 					var controlMsg = controlDom.innerText; 
 					var color = "red";
