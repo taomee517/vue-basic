@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="了解js原型链"/>
+		<title>javascript prototype link</title>
+	</head>
+	<body>
+		<!-- 
+			总结：
+			1. 访问一个对象的属性时：
+				a. 先在自身的属性中查找，找到返回
+				b. 如果没有再沿着__proto__这条链查找，找到返回 
+				c. 如果最终没找到，则返回undefined
+			2. 函数的显示原型指向的对象属性默认是空的Object对象（Object除外）
+			3. 所有的函数都是Functon的实例
+			4. Ojbect的原型对象是原型的尽头
+		 -->
+		<div id="app"></div>		
+		<script type="text/javascript">
+			console.log(Object);
+			console.log(Object.prototype);
+			console.log(Object.__proto__);
+			// console.log(Object.prototyep.__proto__);
+			
+			function Fn(){
+				this.test1 = function(){
+					console.log("test1");
+				}
+			}
+			
+			console.log(Fn.prototype)
+			Fn.prototype.test2 = function(){
+				console.log("test2");
+			}
+			
+			function test3(){
+				console.log("test3");
+			}
+			
+			var fn = new Fn();
+			fn.test1();
+			fn.test2();
+			fn.toString();
+			// fn.test3();
+			
+			// comment 2
+			console.log(Fn.prototype instanceof Object)  //true
+			console.log(Object.prototype instanceof Object) //false
+			console.log(Function.prototype instanceof Object) //true
+			
+			// comment 3 ()
+			console.log(test3)
+			
+		</script>
+	</body>
+</html>
+

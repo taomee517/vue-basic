@@ -22,13 +22,17 @@
 				
 		 -->
 		<div id="app1">
-			<tou></tou><h2>{{brandName}}</h2>
-			<wei></wei><span>{{telephone}}</span>
+			<tou></tou>
+			<h2>{{brandName}}</h2>
+			<wei></wei>
+			<span>{{telephone}}</span>
 		</div>
 		<hr>
 		<div id="app2">
-		  <vh></vh><h2>{{brandName}}</h2>
-		  <vf></vf><span>{{telephone}}</span>
+		  <vh></vh>
+		  <h2>{{brandName}}</h2>
+		  <vf></vf>
+		  <span>{{telephone}}</span>
 		</div>
 		
 		<script type="text/javascript">
@@ -47,7 +51,7 @@
 			
 			const vf = Vue.extend({
 				template: `
-					<div>
+					<div style="display:inline">
 						<span>{{tel}}</span>
 					</div>
 				`,
@@ -61,7 +65,7 @@
 			var app1 = new Vue({
 			  el: '#app1',
 			  data: {
-				brandName: 'AeroIOT',
+				brandName: 'AeroIOT', 
 				telephone: '16574836458'
 			  },
 			  components:{
