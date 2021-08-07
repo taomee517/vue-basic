@@ -6,14 +6,37 @@
 		<script type="text/javascript" src="../static/common.js"></script>
 	</head>
 	<body>
+	<!-- 
+		常用的生命周期钩子：
+			1. mounted: 发送ajax请求，启动定时器，绑定自定义事件，订阅消息等（所有初始化操作）
+			2. beforeDestroy: 清除定时器，解绑自定义事件，取消消息订阅等（所有收尾工作）
+		关于销毁Vue实例：
+			1. 销毁后借助Vue开发者工具看不到任何信息
+			2. 销毁后自定义事件会失效，但原生DOM事件依然有效
+			3. 一般不会在beforeDestroy接口中操作数据，因为即使操作数据，也不会触发更新流程
+	 
+	 
+	 -->
 	<div id="app">
-		{{msg}}
+		<h2>{{msg}}</h2>
+		<hr>
+		<h2 :style="{opacity}">渐变测试</h2>
+		<input type="button" @click="opacity=1" value="恢复正常" />
+		<input type="button" @click="stop" value="结束渐变" />
 	</div>
 	<script type="text/javascript">
 	var vm = new Vue({
 		el : "#app",
 		data : {
-			msg : "hi vue",
+			msg : "Hello Vue!",
+			opacity: 1
+		},
+		methods: {
+			stop(){
+				clearInterval(this.timer);
+				// 如果调用销毁方法，可以回调beforeDestroy接口，也可以在接口里实现关闭定时器
+				// this.$destroy(); 
+			}
 		},
 		//在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
 		beforeCreate:function(){
@@ -32,8 +55,20 @@
 		},
 		//el 被新创建的 vm.$el 替换, 挂在成功	
 		mounted : function(){
-			console.log('mounted');
-		
+			console.log('mounted');	
+			this.timer = setInterval(() =>{
+				if(this.opacity>=1){
+					this.direction = "minus";
+				}
+				if(this.opacity <= 0){
+					this.direction = "plus";
+				}
+				if(this.direction === "minus"){
+					this.opacity -= 0.01;
+				}else {
+					this.opacity += 0.01;
+				}
+			},30)
 		},
 		//数据更新时调用
 		beforeUpdate : function(){
@@ -44,11 +79,15 @@
 		updated : function(){
 			console.log('updated');
 				
+		},
+		
+		beforeDestroy(){
+			clearInterval(this.timer);
 		}
 	});
-	setTimeout(function(){
-		vm.msg = "change ......";
-	}, 3000);
+	// setTimeout(function(){
+	// 	vm.msg = "update ......";
+	// }, 3000);
 	</script>
 </body>
 </html>

@@ -45,7 +45,7 @@
 			<br><span>city is: <span style="color: #FF0000;">{{city}}</span></span><br><br>
 			
 			<label for="motto">座右铭：</label><br>
-			<textarea id="motto" v-model="motto" style="width: 400px;height: 80px;"></textarea>
+			<textarea id="motto" v-model.lazy="motto" style="width: 400px;height: 80px;"></textarea>
 			<br><span>motto is: <span style="color: #FF0000;">{{motto}}</span></span><br><br>
 			
 			<input type="button" @click="submit" value="注册" />
