@@ -3,7 +3,7 @@ module.exports = {
   pages: {
     index: {
       // page 的入口
-      entry: 'src/first-vue/main.js'
+      entry: 'src/ref-sign/main.js'
 	},	
   },
   lintOnSave: false
