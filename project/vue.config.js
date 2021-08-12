@@ -3,7 +3,7 @@ module.exports = {
   pages: {
     index: {
       // page 的入口
-      entry: 'src/vue-mixin/main.js'
+      entry: 'src/vue-plugin/main.js'
 	},	
   },
   lintOnSave: false
