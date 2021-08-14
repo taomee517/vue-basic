@@ -13,11 +13,11 @@
 			</thead>
 			<tbody class="user-list">
 				<tr v-for ="(user,index) in data.list" :key="user.userGuid">
-				  <td>{{index+1}}</td>
-				  <td>{{user.username}}</td>
-				  <td>{{user.roleName}}</td>
-				  <td>{{user.deptName}}</td>
-				  <td>{{dataFormat(user.createdDate)}}</td>
+				  <td class="grid-index">{{index+1}}</td>
+				  <td class="grid-name">{{user.username}}</td>
+				  <td class="grid-role">{{user.roleName}}</td>
+				  <td class="grid-group">{{user.deptName}}</td>
+				  <td class="grid-time">{{dataFormat(user.createdDate)}}</td>
 				  <td><button v-on:click="edit(user.userGuid)">编辑</button></td>
 				  <td><button v-on:click="remove(user.userGuid)">删除</button></td>
 				</tr>
@@ -68,18 +68,23 @@
 <style>
 	.user-table{
 		padding-top: 20px;
+		font-size: 14px;
+		text-align: center;
 	}
 	.grid-index{
 		width: 40px;
 	}
 	.grid-name{
-		width: 100px;
+		width: 110px;
+		text-align: left;
 	}
 	.grid-role{
-		width: 120px;
+		width: 110px;
+		text-align: left;
 	}
 	.grid-group{
-		width: 100px;
+		width: 110px;
+		text-align: left;
 	}
 	.grid-time{
 		width: 200px;
