@@ -3,7 +3,7 @@ module.exports = {
   pages: {
     index: {
       // page 的入口
-      entry: 'src/vue-plugin/main.js'
+      entry: 'src/case-users/main.js'
 	},	
   },
   lintOnSave: false
