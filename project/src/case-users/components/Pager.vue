@@ -1,22 +1,23 @@
 <template>
-	<div>
-		<input type="button" value="首页" @click="turnToStart"/>
-		<input type="button" :disabled="pageIndex===1" value="上一页" @click="turnToPrev"/>
+	<div class="page-container">
+		<span class="page-count">total: <i class="count-number">{{count}}</i>&nbsp&nbsp</span>
+		<input type="button" value="<<" @click="turnToStart"/>
+		<input type="button" :disabled="pageIndex===1" value="<" @click="turnToPrev"/>
 		<input type="button" v-if="pageIndex>1" value="1" @click="turnToIndex"/>
 		<input type="button" v-if="pageIndex>2" value="..." />
-		<input type="button" :value="pageIndex" class="currentPage" @click="turnToIndex" />
+		<input type="button" :value="pageIndex" class="current-page" @click="turnToIndex" />
 		<input type="button" v-if="maxPage>pageIndex+1" value="..." />
 		<input type="button" v-if="maxPage>pageIndex" :value="maxPage" @click="turnToIndex" />
-		<input type="button" :disabled="maxPage===pageIndex" value="下一页" @click="turnToNext"/>
-		<input type="button" value="尾页" @click="turnToEnd"/>
-		<select ref="pageSizeSelect" @change="pageSizeChange">
+		<input type="button" :disabled="maxPage===pageIndex" value=">" @click="turnToNext"/>
+		<input type="button" value=">>" @click="turnToEnd"/>		
+		<select ref="pageSizeSelect" class="page-size-select" @change="pageSizeChange">
 			<option value="10" selected>10条/页</option>
 			<option value="20">20条/页</option>
 			<option value="50">50条/页</option>
 			<option value="100">100条/页</option>
 		</select>
-		<input ref="jumpIndex" :value="pageIndex" class="jumpIndex" @keyup.enter="pageJump" />
-		<input type="button" value="跳转" @click="pageJump"/>
+		<input ref="jumpIndex" :value="pageIndex" class="jump-index" @keyup.enter="pageJump" />
+		<input type="button" value="Go" @click="pageJump"/>
 	</div>
 </template>
 
@@ -62,17 +63,17 @@
 							return;
 						}
 						if(jumpIndexElem.getAttribute('flicker') === '1'){
-							jumpIndexElem.setAttribute('class', 'shadowMax');
+							jumpIndexElem.setAttribute('class', 'shadow-max');
 							jumpIndexElem.setAttribute('flicker','2');
 						}else{
-							jumpIndexElem.setAttribute('class', 'shadowMin');
+							jumpIndexElem.setAttribute('class', 'shadow-min');
 							jumpIndexElem.setAttribute('flicker','1');
 						}
 						twinkleIndex++;
 					},100);
 					return;
 				}
-				jumpIndexElem.setAttribute('class', 'jumpIndex');
+				jumpIndexElem.setAttribute('class', 'jump-index');
 				this.pageIndex = jumpIndex;
 			},
 			pageSizeChange(){
@@ -84,24 +85,39 @@
 </script>
 
 <style>
-	.jumpIndex{
-		width: 20px;
+	.page-container{
+		padding: 20px 0px 0px 300px;
+		height: 22px;
+		vertical-align: bottom;
 	}
-	.shadowMin{
+	.jump-index{
+		width: 24px;
+	}
+	.page-size-select{
+		height: 21px;
+	}
+	.shadow-min{
 		width: 20px;
 		border-radius: 1px;
 		border: 1px solid red;
 		/* box-shadow: inset 0px 0px 2px red !important; */
 	}
-	.shadowMax{
+	.shadow-max{
 		width: 20px;
 		border-radius: 1px;
 		border: 3px solid red;
 		/* box-shadow: inset 0px 0px 4px red !important; */
 	}
-	.currentPage{
+	.current-page{
 		background-color: #38f;
-		border-radius: 0;
-		border: 1px solid #2d78f4;
+		border-radius: 1px;
+		border: 2px solid #2d78f4;
+	}
+	.page-count{
+		font-size: 14px;
+	}
+	.count-number{
+		font-size: 12px;
+		font-weight:bold;
 	}
 </style>

@@ -34,14 +34,14 @@
 	
 	.search-btn{
 		width: 60px;
-		height: 19px;
+		height: 29px;
 		border: none;
 		margin-left: -62px;
 	}
 	
 	.search-input{
-		height: 20px;
-		width: 400px;
+		height: 30px;
+		width: 680px;
 		border: 1px solid gainsboro;
 	}
 </style>
