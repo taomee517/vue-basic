@@ -28,7 +28,7 @@
 			return {
 				pageIndex: 1,
 				pageSize: 10,
-				count: 68
+				count: 0
 			}
 		},
 		computed:{
@@ -80,6 +80,40 @@
 				this.pageIndex = 1;
 				this.pageSize = parseInt(this.$refs.pageSizeSelect.value);
 			}
+		},
+		watch: {
+			pageIndex(val){
+				var pager = {
+					pageIndex: val,
+					pageSize: this.pageSize
+				}
+				this.$bus.$emit("pageChange", pager);
+			},
+			pageSize(val){
+				var pager = {
+					pageIndex: this.pageIndex,
+					pageSize: val
+				}
+				this.$bus.$emit("pageChange", pager);
+			}
+		},
+		mounted(){
+			this.$bus.$on("countChange", count => {
+				this.count = count;
+			});
+			this.$bus.$on("keywordChange", keyword => {
+				var query = {
+					"keyword": keyword,
+					"pageIndex": 1,
+					"pageSize": this.pageSize
+				}
+				this.$bus.$emit("search", query);
+			});
+			var pager = {
+				pageIndex: this.pageIndex,
+				pageSize: this.pageSize
+			};
+			this.$bus.$emit("pageChange", pager);
 		}
 	}
 </script>

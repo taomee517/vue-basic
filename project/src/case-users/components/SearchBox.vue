@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<input ref="searchBox" class="search-input" placeholder="请输入查询关键字" @keyup.enter="keywordFilter" />
+		<input ref="searchBox" class="search-input" placeholder="请输入查询关键字" v-model="keyword" @keyup.enter="keywordFilter" />
 		<button class="search-btn" @click="keywordFilter">search</button>
 	</div>
 </template>
@@ -8,11 +8,26 @@
 <script>
 	export default {
 		name: 'SearchBox',
+		data(){
+			return {
+				keyword: ""
+			}
+		},
 		methods: {
 			keywordFilter(){
 				var keyword = this.$refs.searchBox.value;
-				console.log(keyword);
+				this.$bus.$emit("keywordChange", keyword);
 			}
+		},
+		mounted(){
+			this.$bus.$on("pageChange", pager => {
+				var query = {
+					"keyword": this.keyword,
+					"pageIndex": pager.pageIndex,
+					"pageSize": pager.pageSize
+				};
+				this.$bus.$emit("search", query);
+			});
 		}
 	}
 </script>

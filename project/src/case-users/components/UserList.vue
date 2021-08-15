@@ -12,7 +12,7 @@
 				</tr>
 			</thead>
 			<tbody class="user-list">
-				<tr v-for ="(user,index) in data.list" :key="user.userGuid">
+				<tr v-for ="(user,index) in filterData" :key="user.userGuid">
 				  <td class="grid-index">{{index+1}}</td>
 				  <td class="grid-name">{{user.username}}</td>
 				  <td class="grid-role">{{user.roleName}}</td>
@@ -52,6 +52,11 @@
 						{"userGuid":"47a3fdef","roleName":"一般用户","deptName":"swj","username":"shuiwuju","nickname":"shuiwuju","email":"test@qq.com","tel":null,"createdDate":"2020-04-30T07:08:23.123+0000"},
 						{"userGuid":"40fa4226","roleName":"一般用户","deptName":"swj","username":"jkqswj","nickname":"jkqswj","email":"test@qq.com","tel":null,"createdDate":"2020-04-30T07:24:24.774+0000"}					
 					]
+				},
+				query:{
+					keyword: "",
+					pageIndex: 1,
+					pageSize: 10
 				}
 			}
 		},
@@ -60,7 +65,44 @@
 				var date_temp = data_en.replace("T"," ");
 				var dotIndex = date_temp.indexOf(".")
 				return date_temp.substring(0,dotIndex);
+			},
+			refreshQuery(query){
+				this.query = query;
 			}
+		},
+		computed:{
+			filterCount(){
+				return this.data.count;
+			},
+			filterData(){
+				var tempList = this.data.list;
+				var q = this.query;
+				if(q){
+					var key = q.keyword;
+					var start = (q.pageIndex-1)*q.pageSize;
+					var end = q.pageIndex*q.pageSize;
+					if(key){
+						tempList = tempList.filter(user => user.username.indexOf(key)>-1);
+					}					
+					
+				}	
+				this.data.count = tempList.length;
+				tempList = tempList.slice(start, end);
+				return tempList;
+			}			
+		},
+		watch: {
+			filterCount: {
+				immediate: true,
+				handler(newVal, oldVal){
+					setTimeout(()=>{
+						this.$bus.$emit("countChange", newVal);
+					},50)
+				}
+			}
+		},
+		mounted(){
+			this.$bus.$on("search", this.refreshQuery);
 		}
 	}
 </script>
