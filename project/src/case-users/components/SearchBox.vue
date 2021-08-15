@@ -28,6 +28,9 @@
 				};
 				this.$bus.$emit("search", query);
 			});
+		},
+		beforeDestroy(){
+			this.$bus.$off("pageChange");
 		}
 	}
 </script>
