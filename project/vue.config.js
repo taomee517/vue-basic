@@ -3,7 +3,7 @@ module.exports = {
   pages: {
     index: {
       // page 的入口
-      entry: 'src/case-users/main.js'
+      entry: 'src/case-axios/main.js'
 	},	
   },
   lintOnSave: false
