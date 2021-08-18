@@ -4,23 +4,23 @@ module.exports = {
   pages: {
     index: {
       // page 的入口
-      entry: 'src/case-axios/main.js'
+      entry: 'src/vue-slot/main.js'
 	},	
   },
   lintOnSave: false,
   // devServer: {
   // 	  proxy: 'http://192.168.1.45:8008'
   // },
-  devServer: {
-	  host: '192.168.1.45',
-	  port: 8080,
-	  open: true,
-  	  proxy: {
-		'/test': {
-		  target: 'http://192.168.1.45:8008',
-		  changeOrigin: true,
-		  pathRewrite: { '^/test': ''}
-	  }
-	}
-  }
+ //  devServer: {
+	//   host: '192.168.1.45',
+	//   port: 8080,
+	//   open: true,
+ //  	  proxy: {
+	// 	'/test': {
+	// 	  target: 'http://192.168.1.45:8008',
+	// 	  changeOrigin: true,
+	// 	  pathRewrite: { '^/test': ''}
+	//   }
+	// }
+ //  }
 }
