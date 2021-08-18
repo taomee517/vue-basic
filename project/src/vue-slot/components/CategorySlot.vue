@@ -1,19 +1,17 @@
 <template>
 	<div class="category-container">
 		<h2>{{classify}}分类</h2>
-		<ul>
-			<li v-for="item in classifyContent">{{item}}</li>
-		</ul>
+		<slot></slot>
 	</div>
 </template>
 
 <script>
 	export default{
-		name: 'Category',
+		name: 'CategorySlot',
 		data(){
 			return {};
 		},
-		props:['classify','classifyContent']
+		props:['classify']
 	}
 </script>
 
