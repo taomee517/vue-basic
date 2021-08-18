@@ -2,10 +2,7 @@
 	<div class="category-container">
 		<h2>{{classify}}分类</h2>
 		<ul>
-			<li>xxxx</li>
-			<li>xxxx</li>
-			<li>xxxx</li>
-			<li>xxxx</li>
+			<li v-for="item in classifyContent">{{item}}</li>
 		</ul>
 	</div>
 </template>
@@ -16,7 +13,7 @@
 		data(){
 			return {};
 		},
-		props:['classify']
+		props:['classify','classifyContent']
 	}
 </script>
 
@@ -33,7 +30,9 @@
 		text-align: center;
 	}
 	li{
+		margin-left: -40px;
 		background-color:#00E0E0;
+		border: 1px solid #00AAAA;
 	}
 	ul{
 		list-style: none
