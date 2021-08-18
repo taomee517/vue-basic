@@ -1,19 +1,18 @@
 <template>
 	<div class="category-container">
-		<h2>{{classify}}</h2>
-		<ul>
-			<li v-for="item in classifyContent">{{item}}</li>
-		</ul>
+		<slot :title="classify" :content="film"></slot>
 	</div>
 </template>
 
 <script>
 	export default{
-		name: 'Category',
+		name: 'CategoryScopeSlot',
 		data(){
-			return {};
-		},
-		props:['classify','classifyContent']
+			return {
+				classify: "电影",
+				film: ["寄生虫", "让子弹飞", "夺冠", "战狼2"]
+			};
+		}
 	}
 </script>
 

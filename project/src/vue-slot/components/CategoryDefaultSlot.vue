@@ -1,13 +1,13 @@
 <template>
 	<div class="category-container">
-		<h2>{{classify}}分类</h2>
+		<h2>{{classify}}</h2>
 		<slot></slot>
 	</div>
 </template>
 
 <script>
 	export default{
-		name: 'CategorySlot',
+		name: 'CategoryDefaultSlot',
 		data(){
 			return {};
 		},
@@ -15,7 +15,7 @@
 	}
 </script>
 
-<style scoped="scoped">
+<style scoped>
 	.category-container{
 		width: 400px;
 		height: 100%;

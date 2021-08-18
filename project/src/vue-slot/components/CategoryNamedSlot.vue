@@ -1,19 +1,18 @@
 <template>
 	<div class="category-container">
-		<h2>{{classify}}</h2>
-		<ul>
-			<li v-for="item in classifyContent">{{item}}</li>
-		</ul>
+		<slot name="title"></slot>
+		<slot name="show"></slot>
+		<slot name="content"></slot>
+		<slot name="more"></slot>
 	</div>
 </template>
 
 <script>
 	export default{
-		name: 'Category',
+		name: 'CategoryNamedSlot',
 		data(){
 			return {};
-		},
-		props:['classify','classifyContent']
+		}
 	}
 </script>
 
@@ -24,6 +23,9 @@
 		margin-left: 50px;
 		float: left;
 		display:inline
+	}
+	img{
+		width: 100%;
 	}
 	h2{
 		background-color: orangered;

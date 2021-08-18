@@ -114,7 +114,12 @@
 				pageSize: this.pageSize
 			};
 			this.$bus.$emit("pageChange", pager);
+		},
+		beforeDestroy(){
+			this.$bus.$off("countChange");
+			this.$bus.$off("keywordChange");
 		}
+		
 	}
 </script>
 
